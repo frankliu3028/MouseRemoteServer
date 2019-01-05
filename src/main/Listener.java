@@ -14,7 +14,7 @@ public class Listener extends Thread{
 	public Listener() {
 		mc = new MouseControl();
 		try {
-			socket = new DatagramSocket(10106,InetAddress.getByName("127.0.0.1"));
+			socket = new DatagramSocket(10106,InetAddress.getByName("0.0.0.0"));
 		}catch(Exception e) {
 			e.printStackTrace();
 			RUN = false;
@@ -32,6 +32,7 @@ public class Listener extends Thread{
 			DatagramPacket packet = new DatagramPacket(buffer,buffer.length);
 			try {
 				socket.receive(packet);
+				handlePacket(packet);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -43,9 +44,10 @@ public class Listener extends Thread{
 	
 	public void handlePacket(DatagramPacket packet) {
 		byte[] data = packet.getData();
+		System.out.println("receive "+data[0]);
 		switch(data[0]) {
 		case 0:
-			System.out.println("receive 0");
+			
 			if(data[1]!=106)break;
 			byte[] b = new byte[1];
 			b[0] = 106;
@@ -60,6 +62,8 @@ public class Listener extends Thread{
 		case 1:
 			int x = Util.bytes2Int(data, 1);
 			int y = Util.bytes2Int(data, 5);
+			System.out.println("receive x:"+x);
+			System.out.println("receive y:"+y);
 			mc.moveRelativeTo(x, y);
 			break;
 		case 2:

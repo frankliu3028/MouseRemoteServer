@@ -25,7 +25,7 @@ public class ServerScanner {
             DatagramSocket socket=new DatagramSocket();
             byte[] msgb=new byte[2];
             msgb[0] = 0;
-            msgb[1] = 105;
+            msgb[1] = 106;
             for(int i=0;i<256;++i){
                 try{
                     InetAddress targetIp=InetAddress.getByName(front+i);
@@ -39,9 +39,8 @@ public class ServerScanner {
             DatagramPacket rPacket=new DatagramPacket(buffer,buffer.length);
             socket.setSoTimeout(3000);
             socket.receive(rPacket);
-            String msg=new String(rPacket.getData(),0,rPacket.getLength());
-            int port=Integer.parseInt(msg);
-            InetSocketAddress res=new InetSocketAddress(rPacket.getAddress(),port);
+            
+            InetSocketAddress res=new InetSocketAddress(rPacket.getAddress(),10106);
             return res;
         }catch(SocketTimeoutException e){
             e.printStackTrace();
@@ -58,11 +57,8 @@ public class ServerScanner {
     public String getMyAddr() {
     	Socket socket = new Socket();
     	try {
-    	    //设置主机为www.baidu.com，端口为80
     	    SocketAddress addr = new InetSocketAddress("www.baidu.com", 80);
-    	    //打开连接，超时时间为1秒
     	    socket.connect(addr, 1000);
-    	    //通过socket获取本机ip地址
     	    String res=socket.getLocalAddress().getHostAddress();
     	    System.out.println("ip is:"+res);
     	    return res;

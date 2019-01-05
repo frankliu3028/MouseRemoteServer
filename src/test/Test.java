@@ -1,6 +1,12 @@
 package test;
 
+import java.awt.HeadlessException;
+import java.awt.MouseInfo;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.*;
+
+import main.Util;
 
 public class Test {
 	
@@ -10,18 +16,16 @@ public class Test {
 		// TODO Auto-generated method stub
 		
 		tester = new ApiTester();
-		byte[] data = new byte[2];
-		data[0] = 0;
-		data[1] = 106;
+		
 		try {
-			DatagramPacket packet = new DatagramPacket(data,data.length,InetAddress.getByName("127.0.0.1"),10106);
+			DatagramPacket packet = getPacket();
 			tester.testApi(packet, new TesterCallback() {
 
 				@Override
 				public void receiveData(DatagramPacket packet) {
 					// TODO Auto-generated method stub
 					byte[] data = packet.getData();
-					System.out.println("receiveData:"+data);
+					System.out.println("receiveData:"+data[0]+","+data[1]);
 				}
 				
 			});
@@ -40,6 +44,21 @@ public class Test {
 //		System.out.println("port:"+port);
 		
 		
+	}
+	
+	public static DatagramPacket getPacket() throws HeadlessException, IOException {
+		byte[] data;
+		int x = MouseInfo.getPointerInfo().getLocation().x;
+		int y = MouseInfo.getPointerInfo().getLocation().y;
+		System.out.println("send x:"+x);
+		System.out.println("send y:"+y);
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		bos.write(1);
+		bos.write(Util.int2ByteArrays(x));
+		bos.write(Util.int2ByteArrays(y));
+		data = bos.toByteArray();
+		DatagramPacket packet = new DatagramPacket(data,data.length,InetAddress.getByName("127.0.0.1"),10106);
+		return packet;
 	}
 
 }
