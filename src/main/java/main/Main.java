@@ -2,12 +2,10 @@ package main;
 
 
 public class Main {
-	
-	public static Listener listener;
+	public static final String TAG = Main.class.getSimpleName();
 	
 	public static void main(String[] args) {
-		listener = new Listener();
-		listener.start();
+
 	}
 	
 	

@@ -1,9 +1,13 @@
-package main;
+package entity;
+
+import utils.Log;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
 
 public class MouseControl {
+
+	private final String TAG = MouseControl.class.getSimpleName();
 	
 	private Robot robot;
 	
@@ -26,6 +30,20 @@ public class MouseControl {
 		currX = (int)p.getX();
 		currY = (int)p.getY();
 		robot.mouseMove(x+currX, y+currY);
+	}
+
+	public void pressDown(int button){
+		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON2_MASK){
+			Log.e(TAG, "button mask error!");
+		}
+		robot.mousePress(button);
+	}
+
+	public void pressUp(int button){
+		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON2_MASK){
+			Log.e(TAG, "button mask error!");
+		}
+		robot.mousePress(button);
 	}
 	
 	public void click() {
