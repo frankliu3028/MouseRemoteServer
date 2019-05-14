@@ -46,9 +46,12 @@ public class MouseControl {
 		robot.mousePress(button);
 	}
 	
-	public void click() {
-		robot.mousePress(InputEvent.BUTTON1_MASK);
-		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+	public void mouseClick(int button) {
+		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON2_MASK){
+			Log.e(TAG, "button mask error!");
+		}
+		robot.mousePress(button);
+		robot.mouseRelease(button);
 	}
 	
 	public Point getCurrentMouseLocation() {

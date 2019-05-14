@@ -29,15 +29,19 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 break;
             case MsgId.MOVE_RELATIVE:
                 Point moveRelativeTo = Parser.parseMouseMoveRelativeTo(basicProtocol);
-                mouseControl.moveTo(moveRelativeTo.x, moveRelativeTo.y);
+                mouseControl.moveRelativeTo(moveRelativeTo.x, moveRelativeTo.y);
                 break;
             case MsgId.PRESS_DOWN:
                 int buttonPressDown = getButtonMask(Parser.parsePressDown(basicProtocol));
                 mouseControl.pressDown(buttonPressDown);
                 break;
             case MsgId.PRESS_UP:
-                int buttonPressUp = getButtonMask(Parser.parsePressDown(basicProtocol));
+                int buttonPressUp = getButtonMask(Parser.parsePressUp(basicProtocol));
                 mouseControl.pressUp(buttonPressUp);
+                break;
+            case MsgId.MOUSE_CLICK:
+                int buttonClick = getButtonMask(Parser.parseMouseClick(basicProtocol));
+                mouseControl.mouseClick(buttonClick);
                 break;
                 default:
                     break;

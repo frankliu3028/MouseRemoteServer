@@ -35,5 +35,12 @@ public class Parser {
         return button;
     }
 
+    public static int parseMouseClick(BasicProtocol basicProtocol){
+        int button = Util.byteArrayToInt(basicProtocol.getDataArray());
+        return button;
+    }
+
+
+
 
 }
