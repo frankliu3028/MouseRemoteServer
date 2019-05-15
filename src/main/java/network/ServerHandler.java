@@ -51,7 +51,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     private int getButtonMask(int button){
         int res = -1;
         if(button == Constant.BUTTON_LEFT) res = InputEvent.BUTTON1_MASK;
-        if(button == Constant.BUTTON_RIGHT) res = InputEvent.BUTTON2_MASK;
+        if(button == Constant.BUTTON_RIGHT) res = InputEvent.BUTTON3_MASK;
         return res;
     }
 }

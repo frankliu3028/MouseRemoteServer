@@ -33,21 +33,21 @@ public class MouseControl {
 	}
 
 	public void pressDown(int button){
-		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON2_MASK){
+		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON3_MASK){
 			Log.e(TAG, "button mask error!");
 		}
 		robot.mousePress(button);
 	}
 
 	public void pressUp(int button){
-		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON2_MASK){
+		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON3_MASK){
 			Log.e(TAG, "button mask error!");
 		}
-		robot.mousePress(button);
+		robot.mouseRelease(button);
 	}
 	
 	public void mouseClick(int button) {
-		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON2_MASK){
+		if(button != InputEvent.BUTTON1_MASK && button != InputEvent.BUTTON3_MASK){
 			Log.e(TAG, "button mask error!");
 		}
 		robot.mousePress(button);
