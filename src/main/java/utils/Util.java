@@ -1,8 +1,10 @@
 package utils;
 
+import entity.ScreenSize;
 import io.netty.channel.ChannelHandlerContext;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -193,6 +195,13 @@ public class Util {
 		SocketAddress socketAddress = ctx.channel().remoteAddress();
 		InetSocketAddress inetSocketAddress = (InetSocketAddress) socketAddress;
 		return inetSocketAddress.getPort();
+	}
+
+	public static ScreenSize getScreenSize(){
+		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+		int width = (int)screensize.getWidth();
+		int height = (int)screensize.getHeight();
+		return new ScreenSize(width, height);
 	}
 
 }

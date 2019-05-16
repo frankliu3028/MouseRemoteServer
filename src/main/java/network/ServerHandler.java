@@ -6,6 +6,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import protocol.BasicProtocol;
 import protocol.MsgId;
 import protocol.Parser;
+import protocol.ProtocolFactory;
 import utils.Constant;
 
 import java.awt.*;
@@ -42,6 +43,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             case MsgId.MOUSE_CLICK:
                 int buttonClick = getButtonMask(Parser.parseMouseClick(basicProtocol));
                 mouseControl.mouseClick(buttonClick);
+            case MsgId.SCREEN_SIZE_REQUEST:
+                BasicProtocol screenSizeResponse = ProtocolFactory.createScreenSizeResponse();
+                ctx.writeAndFlush(screenSizeResponse);
                 break;
                 default:
                     break;
